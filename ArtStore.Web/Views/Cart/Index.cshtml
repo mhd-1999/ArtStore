@@ -1,0 +1,55 @@
+﻿@model List<CartItemViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container" style="padding:100px">
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="text-center" style="padding:150px">
+
+            <h3>@ViewBag.Message</h3>
+            <a style="padding:10px 25px" href="@Url.Action("Index", "Home")" class="btn flosun-button secondary-btn black-color rounded-0 ">Order now</a>
+        </div>
+    }
+    else
+    {
+        <h2>Your Cart</h2>
+        <table class="table">
+            <tr>
+                <td>Product</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+                <td style="text-align:center">Action</td>
+            </tr>
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.ElementAt(i).Art.Name</td>
+                    <td>@Model.ElementAt(i).Art.Price</td>
+                    <td>
+                        <a href="@Url.Action("Decrement", "Cart", new {itemIndex = i})" class="btn">-</a>
+                        @Model.ElementAt(i).Quantity
+                        <a href="@Url.Action("Increment", "Cart", new {itemIndex = i})" class="btn">+</a>
+                    </td>
+                    <td>@(Model.ElementAt(i).Quantity * Model.ElementAt(i).Price)</td>
+                    <td style="text-align:center"><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" style="color:grey;font-weight:500;text-align:center">X</a></td>
+                </tr>
+            }
+            @if (ViewBag.TotalPrice > 0)
+            {
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total Order: @ViewBag.TotalPrice</td>
+                    <td><a style="line-height:2" href="@Url.Action("Checkout", "Orders")" class="btn flosun-button secondary-btn black-color rounded-0 w-100">Checkout</a>
+                        </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+

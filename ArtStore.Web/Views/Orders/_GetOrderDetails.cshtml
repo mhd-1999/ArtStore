@@ -1,0 +1,19 @@
+﻿@model IEnumerable<OrderDetail>
+<br />
+<center>
+    <table class="table table-condensed">
+        <tr class="d-flex center-title">
+            <th class="col-md-4">Product</th>
+            <th class="col-md-4">Quantity</th>
+            <th class="col-md-4">Price</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="d-flex center-title">
+                <td class="col-md-4">@Html.Action("GetArtName", "Orders", new { artId = item.ArtId })</td>
+                <td class="col-md-4">@item.Quantity</td>
+                <td class="col-md-4">@item.Price</td>
+            </tr>
+        }
+    </table>
+</center>

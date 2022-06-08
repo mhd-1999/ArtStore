@@ -1,0 +1,63 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="login-register-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Login</h2>
+                        <p class="desc-content">Please login using account detail bellow.</p>
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="single-input-item mb-3">
+                                
+                                    @Html.TextBoxFor(m => m.Email)
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="single-input-item mb-3">
+                               
+                                    @Html.PasswordFor(m => m.Password)
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="single-input-item mb-3">
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input"})
+                                            @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label" })
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="single-input-item mb-3">
+                                <div class="col-md-offset-2">
+                                    <input type="submit" value="Log in" class="btn btn-info" />
+                                </div>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Register a new user?", "Register")
+                            </p>
+                            <p>
+                                @Html.ActionLink("Forget your password?", "ForgotPassword")
+                            </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,26 @@
+﻿
+            <li class="minicart-wrap">
+                <a href="@Url.Action("Index","Cart")" class="minicart-btn toolbar-btn">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="cart-item_count">@Html.Action("CartNoti","Cart")</span>
+                </a>
+            </li>
+            <li class="sidemenu-wrap">
+                <a href="#"><i class="fa fa-search"></i> </a>
+                <ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
+                    <li>
+                        <form action="#">
+                            <input name="search" id="search" placeholder="Search" type="text">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @Html.Partial("_LoginPartial")
+         
+            <li class="mobile-menu-btn d-lg-none">
+                <a class="off-canvas-btn" href="#">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+ 

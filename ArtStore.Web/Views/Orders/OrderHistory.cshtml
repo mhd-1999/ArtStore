@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<Order>
+@{
+    ViewBag.Title = "Order History";
+}
+
+<div class="container" style="text-align:center;padding:150px">
+    @if (!Model.Any())
+    {
+    <h3 class="text-center">You don't have any orders.</h3>
+    <a style="padding:10px 25px" href="@Url.Action("Index", "Home")" class="btn flosun-button secondary-btn black-color rounded-0 ">Order now</a>
+    }
+    else
+    {
+        <h2 class="text-center">Order History</h2>
+        <center>
+            <table class="table table-condensed">
+                <tr class="d-flex center-title">
+                    <th class="col-md-2">OrderDate</th>
+                    <th class="col-md-4">Address</th>
+                    <th class="col-md-2">Total Price</th>
+                    <th class="col-md-2">Status</th>
+                    <th class="col-md-2">Action</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr class="d-flex center-title">
+                        <td class="col-md-2">@item.CreateDate</td>
+                        <td class="col-md-4">@item.Address</td>
+                        <td class="col-md-2">@item.TotalPrice</td>
+                        <td class="col-md-2">@(item.Status == 0 ? "Pending" : "Complete")</td>
+                        <td class="col-md-2"><a style="line-height:2" href="@Url.Action("Details", "Orders", new {id = item.Id})" class="btn flosun-button secondary-btn black-color rounded-0 w-100">Detail</a></td>
+                    </tr>
+                }
+            </table>
+        </center>
+
+        <nav aria-label="Page navigation example" style="padding:50px">
+            <ul class="pagination justify-content-center">
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    ViewBag.PageRange = 3;
+                }
+                <li class="page-item">
+                    <a style="color:black" href="@Url.Action("OrderHistory", "Orders", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                       class="page-link @prevDisabled"><<</a>
+                <li class="page-item">
+                    <a style="color:black" href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                       class="page-link @prevDisabled"><</a>
+                </li>
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                    {
+                        <li class="page-item">
+                            <a style="color:black" class="@(i == Model.PageNumber ? "Current" : "") page-link"
+                               href="@Url.Action("OrderHistory", "Orders", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                        </li>
+                    }
+                }
+                <li class="page-item" >
+                    <a style="color:black" href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                       class="page-link @nextDisabled">></a>
+                <li class="page-item">
+                    <a style="color:black" href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                       class="page-link @nextDisabled">>></a>
+            </ul>
+        </nav>
+    }
+</div>

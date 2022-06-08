@@ -1,0 +1,83 @@
+﻿@model OrderViewModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- Breadcrumb Area End Here -->
+<!-- Checkout Area Start Here -->
+    <div class="checkout-area mt-no-text">
+        <div class="container custom-container">
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+                    <div class="col-lg-6 col-12 col-custom">
+                        <form action="#">
+                            <div class="checkbox-form">
+                                <h3>Billing Details</h3>
+                                <div class="row">
+
+                                    <div class="col-md-12 col-custom">
+                                        <div class="checkout-form-list">
+                                            <label>Address <span class="required">*</span></label>
+                                            @Html.TextBoxFor(m => m.Address, new { @placeholder = "Address" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 col-custom">
+                                        <div class="checkout-form-list">
+                                            <label>Number Card <span class="required">*</span></label>
+                                            @Html.TextBoxFor(m => m.NumberCard, new { @placeholder = "Number Card" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-custom">
+                                        <div class="checkout-form-list">
+                                            <label>CVV<span class="required">*</span></label>
+                                            @Html.TextBoxFor(m => m.Cvv, new { @placeholder = "CVV" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-custom">
+                                        <div class="checkout-form-list">
+                                            <label>Phone<span class="required">*</span></label>
+                                            @Html.TextBoxFor(m => m.PhoneNum, new { @placeholder = "Phone Number" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-custom">
+                                        <div class="checkout-form-list">
+                                            <label>Email Address<span class="required">*</span></label>
+                                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-custom">
+                                        <div id="cbox-info" class="checkout-form-list create-account">
+                                            <p class="mb-2">Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+                                            <label>Account password <span class="required">*</span></label>
+                                            <input placeholder="password" type="password">
+                                        </div>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="col-md-12 col-custom" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2021%2F12%2Fopensea-bans-payc-phayc-bored-ape-ripoff-collections-0.jpg?w=960&cbr=1&q=90&fit=max" />
+                        <div class="col-md-12 col-custom">
+                            <div class="payment-method">
+                                <div class="payment-accordion">
+
+                                    <div class="order-button-payment">
+                                        <input type="submit" class="btn flosun-button secondary-btn black-color rounded-0 w-100" value="Place Order" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

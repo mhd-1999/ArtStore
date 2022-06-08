@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Art>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="intro11-slider-wrap section">
+    <div class="intro11-slider swiper-container">
+        <div class="swiper-wrapper">
+            <div class="intro11-section swiper-slide slide-1 slide-bg-1 bg-position">
+                <!-- Intro Content Start -->
+                <div class="intro11-content text-left">
+
+                </div>
+                <!-- Intro Content End -->
+            </div>
+            <div class="intro11-section swiper-slide slide-2 slide-bg-1 bg-position">
+                <!-- Intro Content Start -->
+                <div class="intro11-content text-left">
+                    <h3 class="title-slider black-slider-title text-uppercase">Collection</h3>
+                    <h2 class="title" style="color:aliceblue">Borde Ape Yatch Club </h2>
+                    <p class="desc-content" style="color:aliceblue">Lorem ipsum dolor sit amet, pri autem nemore bonorum te. Autem fierent ullamcorper ius no, nec ea quodsi invenire. </p>
+                    <a href="" class="btn flosun-button secondary-btn rounded-0">Shop Now</a>
+                </div>
+                <!-- Intro Content End -->
+            </div>
+        </div>
+        <!-- Slider Navigation -->
+        <div class="home1-slider-prev swiper-button-prev main-slider-nav"><i class="lnr lnr-arrow-left"></i></div>
+        <div class="home1-slider-next swiper-button-next main-slider-nav"><i class="lnr lnr-arrow-right"></i></div>
+        <!-- Slider pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div class="container"style="margin-top:100px">
+    <h3 style="margin-bottom:50px">POPULAR PRODUCT</h3>
+    <div class="row">
+        @foreach (var item in Model.Take(6))
+        {
+            @Html.Partial("_ArtOverview", item)
+        }
+    </div>
+</div>

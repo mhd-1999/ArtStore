@@ -1,0 +1,99 @@
+﻿@model Paginated<Art>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2 class="m-0 font-weight-bold text-primary">Art Role</h2>
+<p>
+    <a href="@Url.Action("Create","ArtManagement")" style="color:lawngreen"><i class="fas fa-plus-circle"></i></a>
+</p>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Sale Percent
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    <img width="10%" src="~/Assets/images/@item.Image" />
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @item.SalePercent
+                </td>
+                <td>
+                    <form action="@Url.Action("Delete", "ArtManagement", new { id = item.Id })" method="post">
+                        <a href="@Url.Action("Edit", "ArtManagement", new { id = item.Id })" ><i class="fas fa-edit"></i></a>
+                        <button style="color:cornflowerblue;border:none;background:white" type="submit" onclick="return confirm('Bạn có muốn xóa Danh Mục @item.Name này?');"><i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            ViewBag.PageRange = 3;
+        }
+        <li class="page-item">
+            <a href="@Url.Action("Index", "ArtManagement", new { sortOrder=ViewData["CurrentSort"], pageIndex=1, currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @prevDisabled"><<</a>
+        <li class="page-item">
+            <a href="@Url.Action("Index", "ArtManagement", new { sortOrder=ViewData["CurrentSort"], pageIndex=(Model.PageIndex - 1 <= 0 ? 1 : Model.PageIndex - 1), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @prevDisabled"><</a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i >= Model.PageIndex - ViewBag.PageRange && i <= Model.PageIndex + ViewBag.PageRange)
+            {
+                <li class="page-item">
+                    <a class="@(i==Model.PageIndex ? "Current" : "") page-link"
+                       href="@Url.Action("Index", "ArtManagement", new { sortOrder=ViewData["CurrentSort"], pageIndex=i, currentFilter=ViewData["CurrentFilter"] })">@i</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a href="@Url.Action("Index", "ArtManagement", new { sortOrder=ViewData["CurrentSort"], pageIndex=(Model.PageIndex + 1 > Model.TotalPages ? Model.TotalPages : Model.PageIndex + 1), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @nextDisabled">></a>
+        <li class="page-item">
+            <a href="@Url.Action("Index", "ArtManagement", new { sortOrder=ViewData["CurrentSort"], pageIndex=(Model.TotalPages), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @nextDisabled">>></a>
+    </ul>
+</nav>

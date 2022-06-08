@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Account>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","UsersAdmin")" style="color:lawngreen"><i class="fas fa-plus-circle"></i></a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td style="text-align:end">
+                <a href="@Url.Action("Edit","UsersAdmin",new { id = item.Id })" style="color:cornflowerblue"><i class="fas fa-edit"></i></a>
+                <a href="@Url.Action("Details","UsersAdmin",new { id = item.Id })" style="color:cornflowerblue"><i class="fas fa-info-circle"></i></a>
+                <a href="@Url.Action("Delete","UsersAdmin",new { id = item.Id })" style="color:cornflowerblue"><i class="fas fa-backspace"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

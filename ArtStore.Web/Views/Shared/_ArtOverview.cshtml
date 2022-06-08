@@ -1,0 +1,29 @@
+﻿@model Art
+
+<div class="mb-30 col-lg-4">
+    <div class="product-i">
+        <a class="d-block" href="@Url.Action("Details", "Art", new {artId = Model.Id})">
+            <img src="~/assets/images/@Model.Image" class="product-image-1 w-100" alt="...">
+        </a>
+    </div>
+
+    <div class="product-c">
+        <div class="product-t" style="padding:10px;text-align:center">
+            <a href="@Url.Action("Details", "Art", new {artId = Model.Id})"><h4 class="class=" title-2"">@Model.Name</h4></a>
+        </div>
+        <div class="price"style="text-align:center;margin-bottom:10px">
+            <b class="r-price ">@(Model.SalePercent > 0 ? (Model.Price - Model.SalePercent * Model.Price/100).ToString("F0"):Model.Price.ToString("F0"))đ</b>
+            @if (Model.SalePercent > 0)
+            {
+                <span class="o-price"><del>@Model.Price.ToString("F0")đ</del></span>
+            }
+        </div>
+        <div style="text-align: center; padding: 10px 20px; color: red ">
+            <a style="font-size:15px;line-height:2" href="@Url.Action("AddToCart", "Cart", new {artId = Model.Id})" class="btn flosun-button secondary-btn black-color rounded-0 w-100">Add to cart</a>
+        </div>
+        
+    </div>
+</div>
+
+
+

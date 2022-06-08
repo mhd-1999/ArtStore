@@ -1,0 +1,22 @@
+﻿
+@model Art
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container" style="margin-top:100px">
+    <h2 style="margin-bottom:50px">DetailProduct</h2>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-custom">
+            <img src="~/Assets/images/@Model.Image" />
+        </div>
+        <div class="col-lg-6 col-md-12 col-custom">
+            <h3>@Model.Name</h3>
+            <h4>@ViewBag.Name</h4>
+            <p>@Model.Description</p>
+            <h5>@Model.Price</h5>
+        </div>
+    </div>
+</div>

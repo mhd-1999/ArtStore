@@ -1,0 +1,57 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="login-register-area mt-no-text">
+    <div class="container container-default-2 custom-area">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Create Account</h2>
+                        <p class="desc-content">Please Register using account detail bellow.</p>
+                    </div>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="single-input-item mb-3">
+                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.TextBoxFor(m => m.Name, new { placeholder = "Full Name" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.TextBoxFor(m => m.Address, new { placeholder = "Address" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.TextBoxFor(m => m.NumberCard, new { placeholder = "NumberCard" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.TextBoxFor(m => m.Cvv, new { placeholder = "Cvv" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "ConfirmPassword" })
+                        </div>
+                        <div class="single-input-item mb-3">
+                            <div class="col-md-offset-2">
+                                <input type="submit" class="btn btn-success" value="Register" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
